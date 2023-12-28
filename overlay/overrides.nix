@@ -67,6 +67,7 @@ in rec {
     fsevent-sys
     libgit2-sys
     libdbus-sys
+    libseat-sys
     libssh2-sys
     libudev-sys
     openssl-sys
@@ -171,6 +172,15 @@ in rec {
       };
     }
     else nullOverride;
+  
+  libseat-sys = makeOverride {
+    name = "libseat-sys";
+    overrideAttrs = drv: {
+      buildInputs = drv.buildInputs or [ ] ++ [
+        pkgs.libseat
+      ];
+    };
+  };
 
   libssh2-sys = makeOverride {
     name = "libssh2-sys";
